@@ -1,0 +1,87 @@
+.text-2,
+.text-3 {
+    width: 90%;
+    height: 2.5rem;
+
+    display: flex;
+
+    position: relative;
+    perspective: 1000px;
+}
+
+$width: 10px;
+.panel {
+    width: $width;
+    height: 100%;
+    // border: 1px solid #fff;
+
+    overflow: hidden;
+}
+
+.text-2 .panel {
+    position: relative;
+
+    animation: rotating 10s infinite alternate ease-in-out;
+    animation-delay: var(--delay);
+}
+
+.text-3 {
+    // perspective-origin: 50% calc(50% - 250px);
+    transform-style: preserve-3d;
+
+    animation: 10s rot infinite linear;
+}
+
+@keyframes rot {
+    to {
+        transform: rotateY(-360deg);
+    }
+}
+
+.text-3 .panel {
+    // background: #fff5;
+
+    // font-size: 4rem;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) rotateY(var(--rotate)) translateZ(39px);
+    transform-style: preserve-3d;
+}
+
+.panel::before {
+    content: "Hello Here";
+
+    width: max-content;
+
+    letter-spacing: 0.4rem;
+    color: hsl(var(--hue), 75%, 75%);
+
+    position: absolute;
+    left: var(--left);
+    transform-style: preserve-3d;
+}
+
+@for $i from 0 to 25 {
+    .panel:nth-child(#{$i + 1})::before {
+        --left: #{$i * $width * -1};
+        --hue: #{360/25 * $i};
+    }
+
+    .panel:nth-child(#{$i + 1}) {
+        --delay: #{$i * 0.2s};
+        --rotate: #{360/25 * $i}deg;
+    }
+}
+
+@keyframes rotating {
+    0%,
+    25% {
+        transform: rotateX(0);
+    }
+
+    75%,
+    100% {
+        transform: rotateX(720deg);
+    }
+}
