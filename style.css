@@ -10,8 +10,6 @@ body {
 
     overflow-x: hidden;
     font-family: Arial, Helvetica, sans-serif;
-
-    
 }
 
 section.animated-background {
@@ -70,15 +68,17 @@ section.animated-background .circle:nth-child(10) {
 /* Cards */
 
 section.cards {
-    margin: 0 auto 100vh ;
+    margin: 20vh auto 100vh;
     /* margin: 0 auto; */
 
     width: 75%;
-    height: 100vh;
+    min-height: 100vh;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    flex-wrap: wrap;
 }
 
 section.cards .card-1 {
@@ -377,3 +377,26 @@ section.cards .title-card .text-1 span {
         transform: translateY(0);
     }
 }
+
+/*  */
+/* pant */
+
+.pant {
+    margin: 30vh auto;
+
+    width: 100%;
+    height: 90vh;
+
+    /* width: 1000px;
+    height: 600px; */
+
+    background: #000a;
+    /* background: url(./img/animal-04.jpg);
+    background-size: 100% 100%; */
+
+    display: flex;
+    flex-wrap: wrap;
+
+    position: relative;
+}
+

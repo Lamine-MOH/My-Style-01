@@ -1,0 +1,60 @@
+$rows_num: 8;
+$columns_num: 8;
+
+.pant {
+    perspective: 700px;
+    perspective-origin: 50% calc(50% - 200px);
+}
+
+.pant .bias {
+    width: calc(100% / #{$columns_num});
+    height: calc(100% / #{$rows_num});
+    // border: 1px solid #fff;
+
+    overflow: hidden;
+
+    position: relative;
+
+    animation: rotating 5s infinite;
+    animation-delay: var(--delay);
+
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+@keyframes rotating {
+    0%{
+        transform: rotateY(0deg);
+    }
+
+    50%,
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+.pant .bias .img {
+    width: calc(100% * #{$columns_num});
+    height: calc(100% * #{$rows_num});
+
+    background: url(../img/animal-04.jpg);
+    // background-size: cover;
+    background-size: 100% 100%;
+
+    position: absolute;
+    left: calc(100% * var(--left));
+    top: calc(100% * var(--top));
+}
+
+@for $i from 0 to $rows_num {
+    @for $j from 0 to $columns_num {
+        .pant .bias:nth-child(#{$i * $columns_num + $j + 1}) {
+            --delay: #{0.05 * ($i * $columns_num + $j)}s;
+        }
+
+        .pant .bias:nth-child(#{$i * $columns_num + $j + 1}) .img {
+            --left: #{-1 * $j};
+            --top: #{-1 * $i};
+        }
+    }
+}
